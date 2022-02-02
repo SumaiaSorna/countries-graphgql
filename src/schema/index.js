@@ -41,7 +41,7 @@ const typeDefs = gql`
     population: Int
     flagImageUrl: String
     currencies: [Currency]
-    capital: [City]
+    capital: City
   }
   type Query {
     country(countryCode: String!): country

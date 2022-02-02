@@ -5,3 +5,5 @@ const resolvers = {
     country,
   },
 };
+
+module.exports = resolvers;
