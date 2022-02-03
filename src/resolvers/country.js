@@ -1,40 +1,30 @@
-const country = () => {
+const axios = require("axios");
+
+const country = async (_, args) => {
+  console.log(args);
+  // get the country code
+  const { countryCode } = args;
+  console.log(countryCode);
+
+  // get data from API
+  const url = `https://restcountries.com/v3.1/alpha/${countryCode}`;
+
+  const { data } = await axios.get(url);
+
+  const countryData = data[0];
+
   return {
-    name: "United Kingdom",
-    countryCode: "GB",
-    isIndependent: true,
-    isUnMember: true,
-    region: "Europe",
-    Languages: ["English"],
-    latitude: 34,
-    longitude: 23,
-    population: 67215293,
-    flagImageUrl: "https://flagcdn.com/w320/gb.png",
-    currencies: [
-      {
-        code: "GBP",
-        name: "British pound",
-        symbol: "£",
-        rates: [
-          {
-            code: "AED",
-            rate: 3.673,
-          },
-          {
-            code: "AED",
-            rate: 3.673,
-          },
-          {
-            code: "AED",
-            rate: 3.673,
-          },
-          {
-            code: "AED",
-            rate: 3.673,
-          },
-        ],
-      },
-    ],
+    name: countryData?.name?.common,
+    countryCode: countryData?.cca2,
+    isIndependent: countryData?.independent,
+    isUnMember: countryData?.UnMember,
+    region: countryData?.region,
+    Languages: Object.values(countryData?.languages || {}),
+    latitude: countryData?.latlng[0],
+    longitude: countryData?.latlng[1],
+    population: countryData?.population,
+    flagImageUrl: countryData?.flags?.png,
+    _currencies: countryData?.currencies,
     capital: {
       name: "London",
       latitude: 51.5,

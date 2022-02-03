@@ -17,7 +17,7 @@ const typeDefs = gql`
     forecastWeather: [Weather]
   }
 
-  type Rates {
+  type Rate {
     code: String
     rate: Float
   }
@@ -26,10 +26,10 @@ const typeDefs = gql`
     code: String
     name: String
     symbol: String
-    rates: [Rates]
+    rates: [Rate]
   }
 
-  type country {
+  type Country {
     name: String
     countryCode: String
     isIndependent: Boolean
@@ -44,7 +44,7 @@ const typeDefs = gql`
     capital: City
   }
   type Query {
-    country(countryCode: String!): country
+    country(countryCode: String!): Country
   }
 `;
 
